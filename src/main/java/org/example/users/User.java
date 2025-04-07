@@ -1,13 +1,21 @@
 package org.example.users;
 
+import jakarta.persistence.*;
 import org.example.enums.Sex;
 
 import java.util.Objects;
 
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "user_type", discriminatorType = DiscriminatorType.STRING)
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String firstName;
     private String lastName;
     private int age;
+    @Enumerated(EnumType.STRING)
     private Sex sex;
 
     public User() {
@@ -18,6 +26,14 @@ public class User {
         this.lastName = lastName;
         this.age = age;
         this.sex = sex;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {

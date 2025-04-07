@@ -1,29 +1,34 @@
 package org.example.users;
 
-import org.example.enums.SchoolClass;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import org.example.enums.Sex;
 import org.example.enums.Subjects;
-
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
 public class Teacher extends User {
-    private Set<Subjects> subjects;
+    @Enumerated(EnumType.STRING)
+    private Subjects subjects;
     private int salary;
-    private SchoolClass schoolClass;
 
-    public Teacher(String firstName, String lastName, int age, Sex sex, Set<Subjects> subjects, int salary, SchoolClass schoolClass) {
+
+    public Teacher(String firstName, String lastName, int age, Sex sex, Subjects subjects, int salary) {
         super(firstName, lastName, age, sex);
         this.subjects = subjects;
         this.salary = salary;
-        this.schoolClass = schoolClass;
     }
 
-    public Set<Subjects> getSubjects() {
+    public Teacher() {
+    }
+
+    public Subjects getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(Set<Subjects> subjects) {
+    public void setSubjects(Subjects subjects) {
         this.subjects = subjects;
     }
 
@@ -33,14 +38,6 @@ public class Teacher extends User {
 
     public void setSalary(int salary) {
         this.salary = salary;
-    }
-
-    public SchoolClass getSchoolClass() {
-        return schoolClass;
-    }
-
-    public void setSchoolClass(SchoolClass schoolClass) {
-        this.schoolClass = schoolClass;
     }
 
     @Override
